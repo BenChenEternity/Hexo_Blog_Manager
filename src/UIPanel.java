@@ -26,12 +26,12 @@ public class UIPanel extends JFrame {
                     try {
                         PRO.getInputStream().close();
                     } catch (IOException ex) {
-                        ex.printStackTrace();
+                        System.exit(0);
                     }
                     try {
                         PRO.getOutputStream().close();
                     } catch (IOException ex) {
-                        ex.printStackTrace();
+                        System.exit(0);
                     }
                     PRO.destroy();
                 }
