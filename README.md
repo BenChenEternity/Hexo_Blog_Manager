@@ -58,7 +58,7 @@ Before using it, you should ensure that your hexo can successfully execute `hexo
 
 This application has the following six buttons:
 
-![PIC1](https://raw.githubusercontent.com/BenChenEternity/Images/TheHexoBlogManagerDOCS-en-US-1.webp)
+![PIC1](https://raw.githubusercontent.com/BenChenEternity/Images/main/TheHexoBlogManagerDOCS-en-US-1.webp)
 
 From top to bottom, from left to right, they are:
 
@@ -78,7 +78,7 @@ There are two settings in total:
 *   Blog root directory
 *   cwebp directory
 
-![PIC8](https://raw.githubusercontent.com/BenChenEternity/Images/TheHexoBlogManagerDOCS-en-US-8.webp)
+![PIC8](https://raw.githubusercontent.com/BenChenEternity/Images/main/TheHexoBlogManagerDOCS-en-US-8.webp)
 
 Fill in the root directory of your hexo blog in the first input box.
 
@@ -108,13 +108,13 @@ Displays the name of the article files and their priority (sticky). The displaye
 
 > In the example below, example.md has the `top: true` attribute, so it has the highest priority. HelloWorld.md has a `sticky: 999` attribute, with a value much higher than the rest of the sticky values, which are (6, 5, 4, 3, 2, 1, null), so it has a higher priority than the .md files with smaller or no sticky values. example2.md does not have the `sticky: num` attribute, so it has the lowest priority.
 
-![PIC2](https://raw.githubusercontent.com/BenChenEternity/Images/TheHexoBlogManagerDOCS-en-US-2.webp)
+![PIC2](https://raw.githubusercontent.com/BenChenEternity/Images/main/TheHexoBlogManagerDOCS-en-US-2.webp)
 
 ### Article Creation Panel
 
 Click the "New Article" button to call up the creation panel.
 
-![PIC3](https://raw.githubusercontent.com/BenChenEternity/Images/TheHexoBlogManagerDOCS-en-US-3.webp)
+![PIC3](https://raw.githubusercontent.com/BenChenEternity/Images/main/TheHexoBlogManagerDOCS-en-US-3.webp)
 
 *   `Title`: The title of the article, which is a required field.
 *   `Category`: Select the type of article. Here, an article can only select one type. In the future, it may be changed to allow multiple types to be selected (but this seems to have no difference from tags).
@@ -129,7 +129,7 @@ Click the "New Article" button to call up the creation panel.
 
 > It is worth noting that the absolute path writing method is used here. For example,
 
-![PIC4](https://raw.githubusercontent.com/BenChenEternity/Images/TheHexoBlogManagerDOCS-en-US-4.webp)
+![PIC4](https://raw.githubusercontent.com/BenChenEternity/Images/main/TheHexoBlogManagerDOCS-en-US-4.webp)
 
 > If you have installed some plugins that change the path after generating the static website, such as abbrlink, etc., this function will not be available, please manually configure it in the subsequent attribute modification panel.
 
@@ -141,7 +141,7 @@ After creating it, a prompt box will pop up, and you can click the button inside
 
 Click the `Categories & tags management` button in the new panel to manage your categories and tags. Enter the information in the input box at the top and click `+` to add it, and select a project and click `-` to delete it.
 
-![PIC6](https://raw.githubusercontent.com/BenChenEternity/Images/TheHexoBlogManagerDOCS-en-US-6.webp)
+![PIC6](https://raw.githubusercontent.com/BenChenEternity/Images/main/TheHexoBlogManagerDOCS-en-US-6.webp)
 
 ### Article Deletion
 
@@ -155,7 +155,7 @@ If you manually modify a file's attribute values using an editor, you can simply
 
 Select an article and click the `Details` button to access the attribute values of the file.
 
-![PIC5](https://raw.githubusercontent.com/BenChenEternity/Images/TheHexoBlogManagerDOCS-en-US-5.webp)
+![PIC5](https://raw.githubusercontent.com/BenChenEternity/Images/main/TheHexoBlogManagerDOCS-en-US-5.webp)
 
 You can freely add a `Add new` and delete key-value pairs with the `.md` file header. However, the key must be one of the following:
 
@@ -189,7 +189,7 @@ To generate and deploy the blog, click the `Blog Generation and Deployment` butt
 *   Generate and open a local server at [http://localhost:4000/](http://localhost:4000/), i.e. `hexo g && hexo s`
 *   Generate and deploy to GitHub, i.e. `hexo g && hexo d`
 
-![PIC7](https://raw.githubusercontent.com/BenChenEternity/Images/TheHexoBlogManagerDOCS-en-US-7.webp)
+![PIC7](https://raw.githubusercontent.com/BenChenEternity/Images/main/TheHexoBlogManagerDOCS-en-US-7.webp)
 
 > After you open the server locally, it is best not to force the process to end through the task manager, as this may cause the background process that occupies port 4000 to not release. After clicking `Generate and open on localhost`, Hexo Blog Manager will forcibly end the current process that occupies port 4000 (if any).
 
