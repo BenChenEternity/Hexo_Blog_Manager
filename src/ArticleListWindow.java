@@ -67,11 +67,11 @@ public class ArticleListWindow extends JFrame implements ActionListener {
                         Main.ArticlePanel.loadArticles();
                         JOptionPane.showMessageDialog(null, "The selected files have been successfully deleted:\n" + path + "\\" + filename + ".md\n" + path + "\\" + filename, "Hint", JOptionPane.INFORMATION_MESSAGE);
                     } catch (IOException ex) {
-                        JOptionPane.showMessageDialog(null, "Failed to deleted files", "Hint", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Failed to deleted files", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             } catch (NullPointerException ex) {
-                JOptionPane.showMessageDialog(null, "No files are found", "Hint", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No files are found", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else if (e.getSource() == refreshButton) {
             Main.ArticlePanel.loadArticles();
@@ -139,7 +139,7 @@ public class ArticleListWindow extends JFrame implements ActionListener {
                 }
             }
         } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(null, "No markdown files found at:\n" + Paths.get(Main.Root, "source", "_posts"), "Hint", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No markdown files found at:\n" + Paths.get(Main.Root, "source", "_posts"), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         sortArticles();
     }

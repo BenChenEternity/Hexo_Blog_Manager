@@ -24,7 +24,7 @@ public class cmd {
         builder.redirectErrorStream(true);
         process = builder.start();
         }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "The folder path entered is incorrect.", "Hint", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "The folder path entered is incorrect.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         Main.childProcess.add(process);
     }

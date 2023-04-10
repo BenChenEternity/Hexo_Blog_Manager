@@ -1,7 +1,5 @@
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,7 +10,7 @@ import javax.swing.*;
 public class FileParser {
     static String readFile(String filePath) {
         StringBuilder contentBuilder = new StringBuilder();
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), StandardCharsets.UTF_8))) {
             String line;
             boolean skip = true;
             while ((line = br.readLine()) != null) {
@@ -48,7 +46,7 @@ public class FileParser {
     }
 
 
-    static void displayKeyValueMap(Map<String, String> keyValueMap,Path filePath) {
+    static void displayKeyValueMap(Map<String, String> keyValueMap, Path filePath) {
         List<String> keyOrder = Arrays.asList(
                 "title", "date", "updated", "categories", "tags", "sticky", "keywords",
                 "description", "thumbnail", "cover", "top", "comments", "excerpt", "toc", "mathjax");
@@ -104,7 +102,6 @@ public class FileParser {
         });
 
 
-
         JButton submitButton = new JButton("Submit Changes");
         submitButton.addActionListener(e -> {
             Component[] components = panel.getComponents();
@@ -137,12 +134,12 @@ public class FileParser {
             try {
                 markdownContent = new String(Files.readAllBytes(filePath), StandardCharsets.UTF_8);
             } catch (IOException ex) {
-                JOptionPane.showMessageDialog(null, "File not found", "Hint", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "File not found", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
             assert markdownContent != null;
             String[] markdownParts = markdownContent.split("---");
             if (markdownParts.length < 3) {
-                JOptionPane.showMessageDialog(null, "Invalid Markdown file format: no YAML front matter found", "Hint", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Invalid Markdown file format: no YAML front matter found", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
             String markdownBody = String.join("---", Arrays.copyOfRange(markdownParts, 2, markdownParts.length));
 
@@ -158,10 +155,10 @@ public class FileParser {
             try {
                 Files.write(filePath, newMarkdownContent.getBytes(StandardCharsets.UTF_8));
             } catch (IOException ex) {
-                JOptionPane.showMessageDialog(null, "Failed to write markdown file.", "Hint", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Failed to write markdown file.", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
 
-            SwingUtilities.getWindowAncestor((Component)e.getSource()).dispose();
+            SwingUtilities.getWindowAncestor((Component) e.getSource()).dispose();
 
             String content = FileParser.readFile(String.valueOf(filePath));
             Map<String, String> updatedkeyValueMap = FileParser.parseContent(content);
@@ -189,8 +186,6 @@ public class FileParser {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
-
-
 
 
 }

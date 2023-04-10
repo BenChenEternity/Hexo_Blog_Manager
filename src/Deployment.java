@@ -1,14 +1,10 @@
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.*;
 import java.net.URI;
-import java.net.URL;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class Deployment {
@@ -86,7 +82,7 @@ public class Deployment {
                 CLEAN.waitFor();
                 JOptionPane.showMessageDialog(null, "Cleared", "Hint", JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Failed to clean.", "Hint", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Process interrupted.", "Hint", JOptionPane.ERROR_MESSAGE);
             }
         });
 
@@ -112,7 +108,7 @@ public class Deployment {
                     ServerStatus.setText("Local server open on http://localhost:4000/");
                     ServerStatus.setAlignmentX(JComponent.CENTER_ALIGNMENT);
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Failed to generate.", "Hint", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Failed to generate.", "Hint", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -140,7 +136,7 @@ public class Deployment {
                 GENERATE.waitFor();
                 new cmd(Main.Root, "hexo d", true).execute();
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Failed to generate.", "Hint", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Failed to generate.", "Hint", JOptionPane.ERROR_MESSAGE);
             }
         });
 
@@ -170,7 +166,7 @@ class LocalServer extends Thread {
             cmd Server = new cmd(Main.Root, "hexo s", true);
             Server.execute();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Failed to start server", "Hint", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Failed to start server", "Hint", JOptionPane.ERROR_MESSAGE);
         }
     }
 

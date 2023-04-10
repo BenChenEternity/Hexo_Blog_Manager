@@ -79,13 +79,13 @@ public class UIPanel extends JFrame {
                                 if (folder.exists()) {
                                     Desktop.getDesktop().open(folder);
                                 } else {
-                                    JOptionPane.showMessageDialog(null, "Folder does not exist.", "Hint", JOptionPane.INFORMATION_MESSAGE);
+                                    JOptionPane.showMessageDialog(null, "Folder does not exist.", "ERROR", JOptionPane.ERROR_MESSAGE);
                                 }
                             } catch (IOException ex) {
-                                JOptionPane.showMessageDialog(null, "An error occurred:\n " + ex.getMessage(), "Hint", JOptionPane.INFORMATION_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "An error occurred:\n " + ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
                             }
                         } else {
-                            JOptionPane.showMessageDialog(null, "Folder does not exist.", "Hint", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Folder does not exist.", "ERROR", JOptionPane.ERROR_MESSAGE);
                         }
                         break;
                     }

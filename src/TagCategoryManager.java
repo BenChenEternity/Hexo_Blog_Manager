@@ -41,7 +41,7 @@ public class TagCategoryManager extends JFrame {
                     String[] CurrCategories = currentCategories.split(",");
                     for (String S : CurrCategories) {
                         if (S.equals(newCategory)) {
-                            JOptionPane.showMessageDialog(null, "Category already exists.","Hint", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Category already exists.","Hint", JOptionPane.ERROR_MESSAGE);
                             return;
                         }
                     }
@@ -52,7 +52,7 @@ public class TagCategoryManager extends JFrame {
                 }
                 categoriesTextField.setText(null);
             } else {
-                JOptionPane.showMessageDialog(null, "Invalid input.","Hint", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Invalid input.","Hint", JOptionPane.ERROR_MESSAGE);
             }
         });
 
@@ -86,7 +86,7 @@ public class TagCategoryManager extends JFrame {
                     String[] CurrTags = currentTags.split(",");
                     for (String S : CurrTags) {
                         if (S.equals(newTag)) {
-                            JOptionPane.showMessageDialog(null, "Tag already exists.","Hint", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Tag already exists.","Hint", JOptionPane.ERROR_MESSAGE);
                             return;
                         }
                     }
@@ -96,7 +96,7 @@ public class TagCategoryManager extends JFrame {
                 }
                 tagsTextField.setText(null);
             } else {
-                JOptionPane.showMessageDialog(null, "Invalid input.","Hint", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Invalid input.","Hint", JOptionPane.ERROR_MESSAGE);
             }
             Main.newer.loadTags();
         });

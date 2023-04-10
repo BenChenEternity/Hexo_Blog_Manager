@@ -21,6 +21,8 @@ public class Settings extends JFrame {
             String webpDirectory = webpDirTextField.getText();
             Main.WebpPath = webpDirectory;
             PropertiesFile.saveToSettingsFile("webpDirectory", webpDirectory);
+
+            JOptionPane.showMessageDialog(null, "Path updated.", "Hint", JOptionPane.INFORMATION_MESSAGE);
         });
 
         loadButton = new JButton("Load");
@@ -31,6 +33,8 @@ public class Settings extends JFrame {
             webpDirTextField.setText(webpDirectory);
             Main.Root = rootDirectory;
             Main.WebpPath = webpDirectory;
+
+            JOptionPane.showMessageDialog(null, "Path loaded.", "Hint", JOptionPane.INFORMATION_MESSAGE);
         });
 
         webpDirTextField = new JTextField(20);

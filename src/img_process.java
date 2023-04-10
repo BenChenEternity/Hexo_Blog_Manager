@@ -10,7 +10,7 @@ public class img_process {
         try {
             transfer.waitFor();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Failed to convert", "Hint", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Failed to convert", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

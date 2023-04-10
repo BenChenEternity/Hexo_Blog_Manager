@@ -191,11 +191,11 @@ public class NewArticle extends JFrame {
         submitButton.addActionListener(e -> {
             String title = titleField.getText();
             if (title.equals("")) {
-                JOptionPane.showMessageDialog(null, "No input title.", "Hint", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No input title.", "ERROR", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (Files.exists(Paths.get(Main.Root, "source", "_posts", title + ".md"))) {
-                JOptionPane.showMessageDialog(null, "The article has already exists.", "Hint", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "The article has already exists.", "ERROR", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             String category = (String) categoryBox.getSelectedItem();
@@ -210,7 +210,7 @@ public class NewArticle extends JFrame {
             if (priorityField.isEnabled()) {
                 priority = priorityField.getText();
                 if (!priority.matches("\\d+")) {
-                    JOptionPane.showMessageDialog(null, "Invalid priority input.", "Hint", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Invalid priority input.", "ERROR", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
             }
@@ -221,7 +221,7 @@ public class NewArticle extends JFrame {
             if (thumbnailButton.isEnabled()) {
                 thumbnailFile = thumbnailChooser.getSelectedFile();
                 if (thumbnailFile == null) {
-                    JOptionPane.showMessageDialog(NewArticle.this, "Please select thumbnail file.", "Hint", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(NewArticle.this, "Please select thumbnail file.", "ERROR", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
             }
@@ -229,7 +229,7 @@ public class NewArticle extends JFrame {
             if (coverButton.isEnabled()) {
                 coverFile = coverChooser.getSelectedFile();
                 if (coverFile == null) {
-                    JOptionPane.showMessageDialog(NewArticle.this, "Please select cover file.", "Hint", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(NewArticle.this, "Please select cover file.", "ERROR", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
             }
@@ -240,7 +240,7 @@ public class NewArticle extends JFrame {
                 NEW.execute();
                 NEW.waitFor();
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Failed to create a new article.", "Hint", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Failed to create a new article.", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
 
             String pathPost = String.valueOf(Paths.get(Main.Root, "source", "_posts"));
@@ -252,7 +252,7 @@ public class NewArticle extends JFrame {
                 try {
                     Files.copy(thumbnailFile.toPath(), thumbnailTarget, StandardCopyOption.REPLACE_EXISTING);
                 } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(NewArticle.this, "Failed to copy thumbnail image from:\n" + thumbnailFile.toPath() + "\nto\n" + thumbnailTarget, "Hint", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(NewArticle.this, "Failed to copy thumbnail image from:\n" + thumbnailFile.toPath() + "\nto\n" + thumbnailTarget, "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
                 img_process.InputImgPath = String.valueOf(thumbnailTarget);
                 img_process.OutputImgPath = String.valueOf(Paths.get(pathPost, title, "thumbnail.webp"));
@@ -267,7 +267,7 @@ public class NewArticle extends JFrame {
                 try {
                     Files.copy(coverFile.toPath(), coverTarget, StandardCopyOption.REPLACE_EXISTING);
                 } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(NewArticle.this, "Failed to copy cover image from:\n" + coverFile.toPath() + "\nto\n" + coverTarget, "Hint", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(NewArticle.this, "Failed to copy cover image from:\n" + coverFile.toPath() + "\nto\n" + coverTarget, "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
                 img_process.InputImgPath = String.valueOf(coverTarget);
                 img_process.OutputImgPath = String.valueOf(Paths.get(pathPost, title, "cover.webp"));
@@ -292,8 +292,10 @@ public class NewArticle extends JFrame {
                     }
                 }
                 br.close();
-            } catch (Exception ee) {
-                ee.printStackTrace();
+            } catch (FileNotFoundException ex) {
+                JOptionPane.showMessageDialog(null, "Failed to create a new article.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
 
             try {
@@ -334,36 +336,39 @@ public class NewArticle extends JFrame {
                 System.out.println("Error: " + ee.getMessage());
             }
             Object[] options = {"Close", "View this article in a folder"};
-            int selection = JOptionPane.showOptionDialog(null, "A new article was created.", "Hint", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-            if (selection == 0) {
-                Window window = JOptionPane.getRootFrame();
-                window.dispose();
-            } else {
-                String openFolderPath = String.valueOf(Paths.get(Main.Root, "source", "_posts"));
-                String selectFilePath = String.valueOf(Paths.get(Main.Root, "source", "_posts", title + ".md"));
+            if (filePath.toFile().exists()) {
+                int selection = JOptionPane.showOptionDialog(null, "A new article was created.", "Hint", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+                if (selection == 0) {
+                    Window window = JOptionPane.getRootFrame();
+                    window.dispose();
+                } else {
+                    String openFolderPath = String.valueOf(Paths.get(Main.Root, "source", "_posts"));
+                    String selectFilePath = String.valueOf(Paths.get(Main.Root, "source", "_posts", title + ".md"));
 
-                File folder = new File(openFolderPath);
-                if (!folder.exists() || !folder.isDirectory()) {
-                    JOptionPane.showMessageDialog(null, "The directory containing the post is missing.", "Hint", JOptionPane.INFORMATION_MESSAGE);
-                    return;
-                }
+                    File folder = new File(openFolderPath);
+                    if (!folder.exists() || !folder.isDirectory()) {
+                        JOptionPane.showMessageDialog(null, "The directory containing the post is missing.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
 
-                File file = new File(selectFilePath);
-                if (!file.exists() || !file.isFile()) {
-                    JOptionPane.showMessageDialog(null, "The article is missing.", "Hint", JOptionPane.INFORMATION_MESSAGE);
-                    return;
-                }
+                    File file = new File(selectFilePath);
+                    if (!file.exists() || !file.isFile()) {
+                        JOptionPane.showMessageDialog(null, "The article is missing.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
 
-                String command = "explorer.exe /select,\"" + filePath + "\""; // Windows
-                ProcessBuilder pb = new ProcessBuilder(command.split(" "));
-                pb.directory(folder);
-                try {
-                    pb.start();
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
+                    String command = "explorer.exe /select,\"" + filePath + "\"";
+                    ProcessBuilder pb = new ProcessBuilder(command.split(" "));
+                    pb.directory(folder);
+                    try {
+                        pb.start();
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
+                Main.ArticlePanel.loadArticles();
             }
-            Main.ArticlePanel.loadArticles();
+
         });
 
         c.gridx = 1;
